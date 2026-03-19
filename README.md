@@ -58,7 +58,7 @@ Create `./site/index.html`:
   <body>
     <h1>Project 1 — Live on AWS</h1>
     <p>Deployed via S3 + CloudFront + HTTPS</p>
-    <p>Built by: [Your Name] | Date: [Date]</p>
+    <p>Built by: [Shashank Ballaya] | Date: [19 March, 2026]</p>
   </body>
 </html>
 ```
@@ -74,7 +74,7 @@ Create `./site/error.html`:
  
 ```bash
 # Create bucket (replace with your unique name)
-aws s3 mb s3://yourname-project1-site --region ap-south-1
+aws s3 mb s3://shashank-project1-site --region ap-south-1
 ```
  
 In the AWS Console:
@@ -86,10 +86,10 @@ In the AWS Console:
  
 ```bash
 # Upload all files from local site folder to S3
-aws s3 sync ./site s3://yourname-project1-site/
+aws s3 sync ./site s3://shashank-project1-site/
  
 # Verify files are uploaded
-aws s3 ls s3://yourname-project1-site/
+aws s3 ls s3://shashank-project1-site/
 ```
  
 **Step 4 - Create CloudFront distribution**
@@ -132,11 +132,11 @@ After distribution is created:
 **Step 7 - Wait and test**
  
 - Wait 5–15 minutes for CloudFront status to change from `Deploying` → `Enabled`
-- Visit: `https://xxxxxxxxxxxx.cloudfront.net`
+- Visit: `https://d2pqces69aud9g.cloudfront.net`
 - ✅ Website must load over HTTPS (padlock visible in browser)
-- ![screenshots](screenshots/S3-Cloudfront-Indexpage.png)
+ ![screenshots](screenshots/S3-Cloudfront-Indexpage.png)
 - ✅ Direct S3 object URL must still return `Access Denied`
-- ![screenshots](screenshots/S3-Access-Denied.png)
+ ![screenshots](screenshots/S3-Access-Denied.png)
  
 **Step 8 — Update files (future deployments)**
  
@@ -154,7 +154,7 @@ aws s3 sync ./site s3://yourname-project1-site/
 - [ ] CloudFront distribution status: Enabled
 - [ ] S3 bucket policy auto-updated by AWS (CloudFront private access)
 - [ ] Default root object set to `index.html`
-- [ ] `https://xxxxxxxxxxxx.cloudfront.net` loads website with HTTPS padlock
+- [ ] `https://d2pqces69aud9g.cloudfront.net` loads website with HTTPS padlock
 - [ ] Direct S3 object URL returns `Access Denied`
  
 ---
@@ -163,13 +163,13 @@ aws s3 sync ./site s3://yourname-project1-site/
  
 ```bash
 # Create bucket
-aws s3 mb s3://yourname-project1-site --region ap-south-1
+aws s3 mb s3://shashank-project1-site --region ap-south-1
  
 # Upload files
-aws s3 sync ./site s3://yourname-project1-site/
+aws s3 sync ./site s3://shashank-project1-site/
  
 # List bucket contents
-aws s3 ls s3://yourname-project1-site/
+aws s3 ls s3://shashank-project1-site/
  
 # Verify AWS identity (confirm correct account)
 aws sts get-caller-identity
