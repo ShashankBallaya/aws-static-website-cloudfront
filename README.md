@@ -1,6 +1,6 @@
 # AWS Static Website - S3 + CloudFront + HTTPS
 
->  A production-grade static website hosted on AWS using a private S3 bucket and CloudFront CDN with HTTPS enforcement. The S3 bucker is never publicly accessible - all traffic flows exclusively through CloudFront.
+>  A production-grade static website hosted on AWS using a private S3 bucket and CloudFront CDN with HTTPS enforcement. The S3 bucket is never publicly accessible - all traffic flows exclusively through CloudFront.
 
 ---
 
@@ -25,7 +25,7 @@ S3 Bucket (Private - Block all public access)
 	_ error.html
 ```
 
-**Key security principle:** The S3 bucket has all public access blocked. AWS automatically configures CloudFront with private bucker access - only the CloudFront distribution can read objects from S3. Accessing the S3 object URL directly returns `Access Denied`.
+**Key security principle:** The S3 bucket has all public access blocked. AWS automatically configures CloudFront with private bucket access - only the CloudFront distribution can read objects from S3. Accessing the S3 object URL directly returns `Access Denied`.
 
 ---
 
@@ -134,18 +134,15 @@ After distribution is created:
 - Wait 5–15 minutes for CloudFront status to change from `Deploying` → `Enabled`
 - Visit: `https://xxxxxxxxxxxx.cloudfront.net`
 - ✅ Website must load over HTTPS (padlock visible in browser)
+- ![screenshots](screenshots/S3-Cloudfront-Indexpage.png)
 - ✅ Direct S3 object URL must still return `Access Denied`
+- ![screenshots](screenshots/S3-Access-Denied.png)
  
 **Step 8 — Update files (future deployments)**
  
 ```bash
 # Sync updated files to S3
 aws s3 sync ./site s3://yourname-project1-site/
- 
-# Invalidate CloudFront cache so changes appear immediately
-aws cloudfront create-invalidation \
-  --distribution-id YOUR_DISTRIBUTION_ID \
-  --paths "/*"
 ```
  
 ---
@@ -173,11 +170,6 @@ aws s3 sync ./site s3://yourname-project1-site/
  
 # List bucket contents
 aws s3 ls s3://yourname-project1-site/
- 
-# Invalidate CloudFront cache after updates
-aws cloudfront create-invalidation \
-  --distribution-id YOUR_DISTRIBUTION_ID \
-  --paths "/*"
  
 # Verify AWS identity (confirm correct account)
 aws sts get-caller-identity
@@ -220,5 +212,5 @@ This project runs entirely within AWS Free Tier limits:
  
 ---
  
-*Built as Project 1 of a 6-week Junior Cloud Engineer roadmap*
+*Built as Project 1 of the Junior Cloud Engineer roadmap*
 
